@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images/products"
+public_folder: "/images/products"
+
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "src/data/products"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Price", name: "price", widget: "number", value_type: "int" }
+      - { label: "Minimum Quantity", name: "minQuantity", widget: "number", default: 50, value_type: "int" }
+      - { 
+          label: "Category", 
+          name: "category", 
+          widget: "select", 
+          options: ["wedding-cards", "visiting-cards", "photo-frames", "albums"] 
+        }
+      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Bestseller", name: "bestseller", widget: "boolean", default: false }
+
+  - name: "categories"
+    label: "Categories"
+    folder: "src/data/categories"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
