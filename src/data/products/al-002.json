@@ -1,0 +1,11 @@
+{
+  "id": "al-002",
+  "title": "Classic Photo Album",
+  "description": "Traditional photo album with acid-free pages. 30 pages included.",
+  "price": 1200,
+  "minQuantity": 1,
+  "category": "albums",
+  "images": [
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800"
+  ]
+}

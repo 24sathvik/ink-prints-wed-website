@@ -15,6 +15,9 @@ collections:
     extension: "json"
     format: "json"
     slug: "{{slug}}"
+    summary: "{{title}} - ₹{{price}}"
+    sortable_fields: ["title", "price", "category", "featured", "bestseller"]
+
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }

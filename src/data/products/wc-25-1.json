@@ -1,0 +1,13 @@
+{
+  "id": "wc-25-1",
+  "title": "Premium Wedding Card IMG_9312",
+  "description": "Premium wedding invitation card with exquisite design and superior finishing. Crafted on luxury cardstock.",
+  "price": 25,
+  "minQuantity": 50,
+  "category": "wedding-cards",
+  "images": [
+    "/products/25rs/IMG_9312.webp"
+  ],
+  "featured": true,
+  "bestseller": true
+}

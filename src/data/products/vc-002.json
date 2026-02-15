@@ -1,0 +1,11 @@
+{
+  "id": "vc-002",
+  "title": "Classic Professional",
+  "description": "Clean and professional business cards with matte finish.",
+  "price": 8,
+  "minQuantity": 100,
+  "category": "visiting-cards",
+  "images": [
+    "https://images.unsplash.com/photo-1589041127168-9b1915731dc3?w=800"
+  ]
+}

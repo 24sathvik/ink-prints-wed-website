@@ -1,0 +1,13 @@
+{
+  "id": "al-001",
+  "title": "Premium Wedding Album",
+  "description": "Luxurious leather-bound wedding album with lay-flat pages. 50 pages included.",
+  "price": 2500,
+  "minQuantity": 1,
+  "category": "albums",
+  "images": [
+    "https://images.unsplash.com/photo-1519741497674-611481863552?w=800"
+  ],
+  "featured": true,
+  "bestseller": true
+}

@@ -1,0 +1,11 @@
+{
+  "id": "pf-003",
+  "title": "Modern Acrylic Frame",
+  "description": "Contemporary clear acrylic frame for a minimalist look.",
+  "price": 280,
+  "minQuantity": 1,
+  "category": "photo-frames",
+  "images": [
+    "https://images.unsplash.com/photo-1581404917879-53e19259fdda?w=800"
+  ]
+}

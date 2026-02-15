@@ -1,0 +1,11 @@
+{
+  "id": "al-003",
+  "title": "Mini Memory Book",
+  "description": "Compact photo album perfect for engagement or pre-wedding shoots.",
+  "price": 800,
+  "minQuantity": 1,
+  "category": "albums",
+  "images": [
+    "https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=800"
+  ]
+}

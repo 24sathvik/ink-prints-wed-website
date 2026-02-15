@@ -1,0 +1,12 @@
+{
+  "id": "vc-001",
+  "title": "Executive Gold",
+  "description": "Premium visiting cards with gold foil embossing on luxury cardstock.",
+  "price": 15,
+  "minQuantity": 100,
+  "category": "visiting-cards",
+  "images": [
+    "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800"
+  ],
+  "featured": true
+}

@@ -1,0 +1,11 @@
+{
+  "id": "pf-002",
+  "title": "Vintage Wooden Frame",
+  "description": "Rustic wooden photo frame with distressed finish.",
+  "price": 350,
+  "minQuantity": 1,
+  "category": "photo-frames",
+  "images": [
+    "https://images.unsplash.com/photo-1513519245088-0e12902e35a6?w=800"
+  ]
+}

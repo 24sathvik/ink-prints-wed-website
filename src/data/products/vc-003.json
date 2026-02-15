@@ -1,0 +1,11 @@
+{
+  "id": "vc-003",
+  "title": "Creative Studio",
+  "description": "Artistic business cards with unique textures and creative designs.",
+  "price": 12,
+  "minQuantity": 100,
+  "category": "visiting-cards",
+  "images": [
+    "https://images.unsplash.com/photo-1572502742759-efb9c283a5db?w=800"
+  ]
+}
