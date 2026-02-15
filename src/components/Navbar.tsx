@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Heart } from 'lucide-react';
+import { Logo } from '@/components/Logo';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -40,21 +41,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-20 sm:h-24">
             {/* Logo Area */}
             <Link href="/" className="flex items-center gap-3 group">
-              {/* If logo image exists, we can use it here. For now, text based as per requested style */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className="flex flex-col items-start"
-              >
-                <div className="flex items-center gap-2">
-                  {/* Abstract Leaf Icon Placeholder if needed, or just text */}
-                  <span className="font-serif text-2xl sm:text-3xl font-medium text-[#717f65] tracking-tight group-hover:text-[#32612d] transition-colors duration-300">
-                    Ink <span className="italic text-[#32612d]">&</span> Print
-                  </span>
-                </div>
-                <span className="text-[10px] sm:text-xs tracking-[0.4em] text-black uppercase font-medium pl-1">
-                  Studio
-                </span>
-              </motion.div>
+              <Logo />
             </Link>
 
             {/* Desktop Navigation */}
@@ -124,9 +111,7 @@ export function Navbar() {
             >
               <div className="p-8 h-full flex flex-col">
                 <div className="flex items-center justify-between mb-12">
-                  <span className="font-serif text-2xl font-medium text-[#717f65]">
-                    Ink <span className="italic text-[#32612d]">&</span> Print
-                  </span>
+                  <Logo />
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 text-[#000000]/70 hover:text-[#32612d] transition-colors"

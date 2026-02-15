@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react';
+import { Logo } from '@/components/Logo';
 
 const footerLinks = {
   products: [
@@ -26,14 +27,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6 group">
-              <div className="flex flex-col items-start">
-                <span className="font-serif text-2xl font-medium text-[#f2efe6] tracking-wide group-hover:text-[#717f65] transition-colors">
-                  Ink <span className="italic text-[#717f65]">&</span> Print
-                </span>
-                <span className="text-[10px] tracking-[0.3em] text-[#717f65] uppercase font-medium mt-1">
-                  Studio
-                </span>
-              </div>
+              <Logo isFooter />
             </Link>
             <p className="text-[#f2efe6]/60 text-sm leading-relaxed mb-8 font-light max-w-xs">
               Crafting premium wedding invitations and printing services with elegance and precision since 2010.
