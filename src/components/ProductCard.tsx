@@ -29,8 +29,9 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             loading="lazy"
+            quality={80}
           />
-          
+
           {/* Hover overlay with shimmer */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#32612d]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
