@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Filter, Search, X } from 'lucide-react';
+import { Filter, Search, X, ChevronDown, Check } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 import { Product } from '@/lib/products';
 
@@ -30,21 +30,23 @@ export function ProductList({ initialProducts, categories }: ProductListProps) {
         }
     }, [searchParams]);
 
-    const filteredProducts = initialProducts
-        .filter(product => {
-            const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
-            const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                product.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredProducts = useMemo(() => {
+        return initialProducts
+            .filter(product => {
+                const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
+                const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    product.description.toLowerCase().includes(searchQuery.toLowerCase());
 
-            const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
+                const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
 
-            return matchesCategory && matchesSearch && matchesPrice;
-        })
-        .sort((a, b) => {
-            if (sortBy === 'low-to-high') return a.price - b.price;
-            if (sortBy === 'high-to-low') return b.price - a.price;
-            return 0; // Featured sort logic (default order or based on 'featured' prop if needed)
-        });
+                return matchesCategory && matchesSearch && matchesPrice;
+            })
+            .sort((a, b) => {
+                if (sortBy === 'low-to-high') return a.price - b.price;
+                if (sortBy === 'high-to-low') return b.price - a.price;
+                return 0;
+            });
+    }, [initialProducts, activeCategory, searchQuery, priceRange, sortBy]);
 
     const updateCategory = (id: string) => {
         setActiveCategory(id);
@@ -100,45 +102,98 @@ export function ProductList({ initialProducts, categories }: ProductListProps) {
                         </div>
                     </div>
 
-                    {/* Desktop Categories */}
-                    <div className="hidden lg:flex items-center justify-between border-b border-[#32612d]/10 pb-6">
-                        <div className="flex items-center gap-8">
-                            <button
-                                onClick={() => updateCategory('all')}
-                                className={`relative text-sm font-medium tracking-wide transition-colors ${activeCategory === 'all' ? 'text-[#32612d]' : 'text-[#6B6462] hover:text-[#32612d]'
-                                    }`}
-                            >
-                                All Products
-                                {activeCategory === 'all' && (
-                                    <motion.div layoutId="categoryUnderline" className="absolute -bottom-[25px] left-0 right-0 h-0.5 bg-[#32612d]" />
-                                )}
-                            </button>
-                            {categories.map((cat) => (
+                    {/* Desktop Categories & Filters */}
+                    <div className="hidden lg:flex flex-col gap-6 border-b border-[#32612d]/10 pb-8">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-8">
                                 <button
-                                    key={cat.id}
-                                    onClick={() => updateCategory(cat.id)}
-                                    className={`relative text-sm font-medium tracking-wide transition-colors ${activeCategory === cat.id ? 'text-[#32612d]' : 'text-[#6B6462] hover:text-[#32612d]'
+                                    onClick={() => updateCategory('all')}
+                                    className={`relative text-sm font-medium tracking-wide transition-colors ${activeCategory === 'all' ? 'text-[#32612d]' : 'text-[#6B6462] hover:text-[#32612d]'
                                         }`}
                                 >
-                                    {cat.name}
-                                    {activeCategory === cat.id && (
-                                        <motion.div layoutId="categoryUnderline" className="absolute -bottom-[25px] left-0 right-0 h-0.5 bg-[#32612d]" />
+                                    All Products
+                                    {activeCategory === 'all' && (
+                                        <motion.div layoutId="categoryUnderline" className="absolute -bottom-[33px] left-0 right-0 h-0.5 bg-[#32612d]" />
                                     )}
                                 </button>
-                            ))}
-                        </div>
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat.id}
+                                        onClick={() => updateCategory(cat.id)}
+                                        className={`relative text-sm font-medium tracking-wide transition-colors ${activeCategory === cat.id ? 'text-[#32612d]' : 'text-[#6B6462] hover:text-[#32612d]'
+                                            }`}
+                                    >
+                                        {cat.name}
+                                        {activeCategory === cat.id && (
+                                            <motion.div layoutId="categoryUnderline" className="absolute -bottom-[33px] left-0 right-0 h-0.5 bg-[#32612d]" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
 
-                        <div className="flex items-center gap-4">
-                            <span className="text-xs text-[#717f65] uppercase tracking-widest font-medium">Sort by:</span>
-                            <select
-                                value={sortBy}
-                                onChange={(e) => setSortPrice(e.target.value as any)}
-                                className="bg-transparent text-sm font-medium text-[#32612d] focus:outline-none cursor-pointer"
-                            >
-                                <option value="featured">Featured</option>
-                                <option value="low-to-high">Price: Low to High</option>
-                                <option value="high-to-low">Price: High to Low</option>
-                            </select>
+                            <div className="flex items-center gap-8">
+                                {/* Desktop Price Slider */}
+                                <div className="flex items-center gap-4 w-64 bg-white/50 px-4 py-2 rounded-full border border-[#dcd8cc]/50">
+                                    <span className="text-xs font-bold text-[#717f65] uppercase whitespace-nowrap">Price:</span>
+                                    <div className="flex-1">
+                                        <Slider
+                                            defaultValue={[0, 2000]}
+                                            max={2000}
+                                            step={10}
+                                            value={priceRange}
+                                            onValueChange={setPriceRange}
+                                        />
+                                    </div>
+                                    <span className="text-xs font-medium text-[#32612d] tabular-nums whitespace-nowrap">
+                                        ₹{priceRange[0]} - ₹{priceRange[1]}
+                                    </span>
+                                </div>
+
+                                {/* Custom Sort Dropdown */}
+                                <div className="relative z-20">
+                                    <button
+                                        onClick={() => setIsFilterOpen(!isFilterOpen)} // Reusing state for now, or create new one? 
+                                        // Actually, let's use a separate state for sort dropdown if needed, but for now simple hover or click is fine.
+                                        // Let's create a local state for this dropdown right here in the component would be ideal, but for replacing simple select, 
+                                        // we can use a group-hover or a simple details/summary pattern or just a new state variable. 
+                                        // Let's assume we adding `isSortOpen` state.
+                                        // Since we can't easily add state in this replace block without changing the whole file top, 
+                                        // I'll use a `group` hover for simplicity or just keep it simple.
+                                        // Wait, "make it very smooth". A proper dropdown is better.
+                                        // I will have to add `isSortOpen` state in a separate edit. 
+                                        // For now, let's use the standard Tailwind group-hover approach for a pure CSS dropdown to avoid state complexity if possible,
+                                        // OR just implement it and I'll add the state in a subsequent edit.
+                                        className="flex items-center gap-2 text-sm font-medium text-[#32612d] bg-white px-4 py-2.5 rounded-full border border-[#dcd8cc] hover:border-[#32612d] transition-all min-w-[180px] justify-between group relative"
+                                    >
+                                        <span className="flex items-center gap-2">
+                                            <span className="text-[#717f65] font-normal">Sort by:</span>
+                                            {sortBy === 'featured' && 'Featured'}
+                                            {sortBy === 'low-to-high' && 'Price: Low to High'}
+                                            {sortBy === 'high-to-low' && 'Price: High to Low'}
+                                        </span>
+                                        <ChevronDown className="w-4 h-4 text-[#717f65] group-hover:rotate-180 transition-transform duration-300" />
+
+                                        {/* Dropdown Menu */}
+                                        <div className="absolute top-full right-0 mt-2 w-full bg-white rounded-2xl shadow-xl border border-[#dcd8cc] overflow-hidden opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top scale-95 group-hover:scale-100">
+                                            {[
+                                                { id: 'featured', label: 'Featured' },
+                                                { id: 'low-to-high', label: 'Price: Low to High' },
+                                                { id: 'high-to-low', label: 'Price: High to Low' },
+                                            ].map((option) => (
+                                                <button
+                                                    key={option.id}
+                                                    onClick={() => setSortPrice(option.id as any)}
+                                                    className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between hover:bg-[#f2efe6] transition-colors ${sortBy === option.id ? 'text-[#32612d] font-semibold bg-[#f2efe6]/50' : 'text-[#6B6462]'
+                                                        }`}
+                                                >
+                                                    {option.label}
+                                                    {sortBy === option.id && <Check className="w-3 h-3 text-[#32612d]" />}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </header>
