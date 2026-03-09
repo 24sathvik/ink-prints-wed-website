@@ -6,33 +6,39 @@ import { Product } from '@/lib/products';
 import { ProductCard } from './ProductCard';
 import { motion } from 'framer-motion';
 
-// We need to fetch product details. Since this is a client component, 
-// and we don't have a robust API yet, we might need to pass all products 
-// or fetch them. For now, we'll fetch from a server action or API if available, 
-// or simpler: we'll accept a list of all products (or a lookup function) as a prop 
-// OR we can fetch from the static JSON files via an API route. 
-// However, `getProducts` is server-side.
-// OPTION: We'll create a simple API route /api/products to get all products. 
-// OR simpler for this task: We can pass `products` from the parent (Home page) if available.
-// Home page is a Server Component, so it can fetch products and pass them.
-// Let's do that: Pass `products` prop.
+// This Client Component fetches all products to populate the recent views list.
 
 interface RecentlyViewedProps {
-    products: Product[];
+    excludeId?: string;
 }
 
-export function RecentlyViewed({ products }: RecentlyViewedProps) {
+export function RecentlyViewed({ excludeId }: RecentlyViewedProps = {}) {
     const { recentIds } = useRecentlyViewed();
     const [viewedProducts, setViewedProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        if (recentIds.length > 0 && products.length > 0) {
-            const filtered = recentIds
-                .map(id => products.find(p => p.id === id))
-                .filter((p): p is Product => p !== undefined);
-            setViewedProducts(filtered);
+        async function fetchProducts() {
+            if (recentIds.length > 0) {
+                try {
+                    const res = await fetch('/api/products');
+                    const allProducts: Product[] = await res.json();
+
+                    const filtered = recentIds
+                        .filter(id => id !== excludeId)
+                        .map(id => allProducts.find((p: Product) => p.id === id))
+                        .filter((p): p is Product => p !== undefined);
+
+                    // Filter out the current viewed product from list
+                    setViewedProducts(filtered);
+                } catch (error) {
+                    console.error("Failed to load products for recently viewed", error);
+                }
+            }
         }
-    }, [recentIds, products]);
+
+        // Remove current product id if we want it completely hidden
+        fetchProducts();
+    }, [recentIds]);
 
     if (viewedProducts.length === 0) return null;
 

@@ -151,19 +151,9 @@ export function ProductList({ initialProducts, categories }: ProductListProps) {
 
                                 {/* Custom Sort Dropdown */}
                                 <div className="relative z-20">
-                                    <button
-                                        onClick={() => setIsFilterOpen(!isFilterOpen)} // Reusing state for now, or create new one? 
-                                        // Actually, let's use a separate state for sort dropdown if needed, but for now simple hover or click is fine.
-                                        // Let's create a local state for this dropdown right here in the component would be ideal, but for replacing simple select, 
-                                        // we can use a group-hover or a simple details/summary pattern or just a new state variable. 
-                                        // Let's assume we adding `isSortOpen` state.
-                                        // Since we can't easily add state in this replace block without changing the whole file top, 
-                                        // I'll use a `group` hover for simplicity or just keep it simple.
-                                        // Wait, "make it very smooth". A proper dropdown is better.
-                                        // I will have to add `isSortOpen` state in a separate edit. 
-                                        // For now, let's use the standard Tailwind group-hover approach for a pure CSS dropdown to avoid state complexity if possible,
-                                        // OR just implement it and I'll add the state in a subsequent edit.
-                                        className="flex items-center gap-2 text-sm font-medium text-[#32612d] bg-white px-4 py-2.5 rounded-full border border-[#dcd8cc] hover:border-[#32612d] transition-all min-w-[180px] justify-between group relative"
+                                    <div
+                                        tabIndex={0}
+                                        className="flex items-center gap-2 text-sm font-medium text-[#32612d] bg-white px-4 py-2.5 rounded-full border border-[#dcd8cc] hover:border-[#32612d] transition-all min-w-[180px] justify-between group relative cursor-pointer"
                                     >
                                         <span className="flex items-center gap-2">
                                             <span className="text-[#717f65] font-normal">Sort by:</span>
@@ -191,7 +181,7 @@ export function ProductList({ initialProducts, categories }: ProductListProps) {
                                                 </button>
                                             ))}
                                         </div>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -36,100 +36,114 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
     return (
         <main className="min-h-screen bg-[#f2efe6] selection:bg-[#717f65] selection:text-white">
             {/* Hero Section */}
-            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
-                <BackgroundShapes />
+            <section className="relative w-full min-h-screen flex flex-col pt-24 lg:pt-32 bg-[#f2efe6] overflow-hidden">
+                {/* Top Beige Content Area */}
+                <div className="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 relative z-10">
 
-                {/* Floating wedding petals */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute animate-float-up opacity-20"
-                            style={{
-                                left: `${15 + i * 15}%`,
-                                animationDelay: `${i * 1.5}s`,
-                                animationDuration: `${8 + i * 2}s`,
+                    {/* Left Typography Area */}
+                    <div className="w-full lg:w-[55%] flex flex-col justify-center pb-20 lg:pb-32 pt-8 lg:pt-16">
+                        <motion.div
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
                             }}
+                            className="max-w-xl"
                         >
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M10 0C10 0 13 7 10 10C7 7 10 0 10 0Z" fill="#717f65" opacity="0.5" />
-                                <path d="M10 20C10 20 7 13 10 10C13 13 10 20 10 20Z" fill="#32612d" opacity="0.3" />
-                            </svg>
-                        </div>
-                    ))}
+                            <motion.h1
+                                variants={fadeUp as any}
+                                className="font-serif text-[4.5rem] md:text-7xl xl:text-[6.5rem] text-[#1a1a1a] mb-6 leading-[0.9] tracking-tight"
+                            >
+                                Ink <span className="italic font-light text-[#32612d] mx-2">&amp;</span> Print <br />
+                                <span className="font-light block mt-3 text-7xl md:text-8xl xl:text-[7rem]">Studio</span>
+                            </motion.h1>
+
+                            <motion.p
+                                variants={fadeUp as any}
+                                className="text-[#6B6462] text-lg md:text-xl font-light mb-10 max-w-md leading-relaxed"
+                            >
+                                Crafting elegant wedding invitations and artistic printing services.
+                                Designed to make your precious moments truly unforgettable.
+                            </motion.p>
+                        </motion.div>
+                    </div>
+
+                    {/* Right Arched Image Area */}
+                    <div className="w-full lg:w-[45%] relative hidden lg:block">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, delay: 0.3 }}
+                            className="absolute top-0 right-0 w-[500px] xl:w-[550px] aspect-[4/4.8] z-30"
+                        >
+                            <div className="w-full h-full rounded-t-full overflow-hidden shadow-2xl relative bg-white border-8 border-white">
+                                <Image
+                                    src="/hero-invitations.png"
+                                    alt="Wedding Invitations"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
+                            </div>
+
+                            {/* Floating Star Decals */}
+                            <motion.svg animate={{ rotate: 180 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute top-[10%] -left-8 w-10 h-10 text-[#223826] z-40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                            </motion.svg>
+                            <motion.svg animate={{ rotate: -90 }} transition={{ duration: 15, repeat: Infinity, ease: "linear" }} className="absolute bottom-[30%] -left-12 w-8 h-8 text-[#f2efe6] drop-shadow-md z-40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                            </motion.svg>
+                            <motion.svg animate={{ rotate: 90 }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute top-[40%] -right-12 w-12 h-12 text-[#1a1a1a] opacity-80 z-40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+                            </motion.svg>
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/noise-lines.png')]"></div>
-
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        className="mb-8 flex justify-center items-center gap-4"
-                    >
+                {/* Bottom Green Band */}
+                <div className="w-full bg-[#223826] relative z-20 py-12 lg:py-0 lg:h-[220px]">
+                    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 h-full flex items-center">
                         <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: 64 }}
-                            transition={{ duration: 1, delay: 0.3 }}
-                            className="h-px bg-[#32612d]/30 overflow-hidden"
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.4 } }
+                            }}
+                            className="flex flex-wrap gap-5 lg:w-[55%]"
+                        >
+                            <motion.div variants={fadeUp as any}>
+                                <Link
+                                    href="/products?category=wedding-cards"
+                                    className="px-8 py-4 bg-[#f2efe6] text-[#223826] rounded-md text-sm uppercase tracking-widest font-semibold hover:bg-white transition-all shadow-xl hover:-translate-y-1 inline-flex items-center gap-2 group"
+                                >
+                                    Explore Collection
+                                </Link>
+                            </motion.div>
+                            <motion.div variants={fadeUp as any}>
+                                <Link
+                                    href="/contact"
+                                    className="px-8 py-4 border border-[#f2efe6]/50 text-[#f2efe6] rounded-md text-sm uppercase tracking-widest font-semibold hover:bg-[#f2efe6]/10 transition-all inline-flex items-center gap-2"
+                                >
+                                    Custom Inquiry
+                                </Link>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Mobile Image (Visible only on small screens below the band) */}
+                <div className="w-full relative block lg:hidden bg-[#223826] pb-12 px-6">
+                    <div className="w-full max-w-[400px] mx-auto aspect-[4/4.5] rounded-t-full overflow-hidden shadow-2xl relative border-4 border-white">
+                        <Image
+                            src="/hero-invitations.png"
+                            alt="Wedding Invitations"
+                            fill
+                            className="object-cover"
+                            priority
                         />
-                        <span className="text-[#32612d] tracking-[0.4em] uppercase text-xs font-semibold">Est. 2010</span>
-                        <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: 64 }}
-                            transition={{ duration: 1, delay: 0.3 }}
-                            className="h-px bg-[#32612d]/30 overflow-hidden"
-                        />
-                    </motion.div>
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                        className="font-serif text-6xl md:text-8xl lg:text-9xl text-[#717f65] mb-8 leading-[1.05] tracking-tight"
-                    >
-                        Ink <span className="text-[#32612d] italic">&</span> Print <br />
-                        <motion.span
-                            initial={{ opacity: 0, letterSpacing: "0.3em" }}
-                            animate={{ opacity: 1, letterSpacing: "0.05em" }}
-                            transition={{ duration: 1.2, delay: 0.6 }}
-                            className="text-[#000000] text-4xl md:text-6xl lg:text-7xl block mt-2 font-light"
-                        >
-                            Studio
-                        </motion.span>
-                    </motion.h1>
-
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="text-[#6B6462] text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed font-light"
-                    >
-                        Crafting elegant wedding invitations and artistic printing services.
-                        Designed to make your most precious moments truly unforgettable.
-                    </motion.p>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.7 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                    >
-                        <Link
-                            href="/products?category=wedding-cards"
-                            className="px-8 py-4 bg-[#32612d] text-white rounded-full hover:bg-[#264a22] transition-all duration-300 flex items-center gap-2 group shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto justify-center"
-                        >
-                            Explore Collection
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="px-8 py-4 border border-[#717f65] text-[#717f65] rounded-full hover:bg-[#717f65] hover:text-white transition-all duration-300 w-full sm:w-auto text-center"
-                        >
-                            Custom Inquiry
-                        </Link>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -142,10 +156,10 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
-                        variants={staggerContainer}
+                        variants={staggerContainer as any}
                         className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
                     >
-                        <motion.div variants={fadeUp} custom={0} className="max-w-2xl">
+                        <motion.div variants={fadeUp as any} custom={0} className="max-w-2xl">
                             <span className="text-[#717f65] font-medium tracking-wider text-sm uppercase mb-2 block">Curated Selection</span>
                             <h2 className="font-serif text-4xl md:text-5xl text-[#000000] mb-4 tracking-tight">
                                 Featured Collections
@@ -158,7 +172,7 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
                                 className="h-1 bg-[#32612d] rounded-full"
                             />
                         </motion.div>
-                        <motion.div variants={fadeUp} custom={1}>
+                        <motion.div variants={fadeUp as any} custom={1}>
                             <Link
                                 href="/products"
                                 className="text-[#32612d] font-medium flex items-center gap-2 hover:gap-3 transition-all group pb-2 border-b border-transparent hover:border-[#32612d]"
@@ -186,13 +200,13 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        variants={staggerContainer}
+                        variants={staggerContainer as any}
                         className="text-center max-w-3xl mx-auto mb-20"
                     >
-                        <motion.h2 variants={fadeUp} custom={0} className="font-serif text-4xl md:text-5xl text-[#000000] mb-6 tracking-tight">
+                        <motion.h2 variants={fadeUp as any} custom={0} className="font-serif text-4xl md:text-5xl text-[#000000] mb-6 tracking-tight">
                             Why Choose Ink & Print
                         </motion.h2>
-                        <motion.p variants={fadeUp} custom={1} className="text-[#6B6462] text-lg">
+                        <motion.p variants={fadeUp as any} custom={1} className="text-[#6B6462] text-lg">
                             We combine traditional craftsmanship with modern artistic vision.
                         </motion.p>
                     </motion.div>
@@ -224,7 +238,7 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
             </section>
 
             {/* Recently Viewed */}
-            <RecentlyViewed products={allProducts} />
+            <RecentlyViewed />
 
             {/* Testimonials */}
             <section className="py-24 bg-white overflow-hidden relative">
@@ -284,7 +298,7 @@ export function HomeContent({ featuredProducts, allProducts }: HomeContentProps)
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        variants={scaleIn}
+                        variants={scaleIn as any}
                         className="bg-[#32612d] rounded-[2.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl"
                     >
                         <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#717f65] rounded-full blur-[80px] opacity-40 mix-blend-screen" />

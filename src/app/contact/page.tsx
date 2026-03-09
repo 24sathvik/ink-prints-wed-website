@@ -70,8 +70,10 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-serif text-xl text-[#000000] mb-2 leading-none mt-1">Visit Our Studio</h3>
                     <p className="text-[#6B6462] text-sm leading-relaxed font-light">
-                      123 Wedding Lane, Print District<br />
-                      Mumbai, Maharashtra 400001
+                      1-7-189, ECIL Cross Roads,<br />
+                      opp. ECIL Bus Terminal Road,<br />
+                      Kamala Nagar, Moula Ali,<br />
+                      Secunderabad, Telangana 500062
                     </p>
                   </div>
                 </div>
@@ -90,8 +92,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-serif text-xl text-[#000000] mb-2 leading-none mt-1">Call Us</h3>
                     <p className="text-[#6B6462] text-sm font-light">
-                      <a href="tel:+919876543210" className="hover:text-[#32612d] transition-colors block mb-1">+91 98765 43210</a>
-                      <a href="tel:+912212345678" className="hover:text-[#32612d] transition-colors block">+91 22 1234 5678</a>
+                      <a href="tel:+919347133787" className="hover:text-[#32612d] transition-colors block mb-1">+91 93471 33787</a>
                     </p>
                   </div>
                 </div>
@@ -111,12 +112,12 @@ export default function ContactPage() {
                     <h3 className="font-serif text-xl text-[#000000] mb-2 leading-none mt-1">WhatsApp Us</h3>
                     <p className="text-[#6B6462] text-sm font-light">
                       <a
-                        href="https://wa.me/919999999999"
+                        href="https://wa.me/919347133787"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-[#25D366] transition-colors block mb-1"
                       >
-                        +91 99999 99999
+                        +91 93471 33787
                       </a>
                       <span className="text-xs text-[#717f65] font-medium uppercase tracking-wider">Available 24/7 for queries</span>
                     </p>

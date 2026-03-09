@@ -28,7 +28,7 @@ export default function AboutPage() {
                 <span className="text-[#32612d] italic">Since 2010</span>
               </h1>
               <p className="text-[#6B6462] text-lg leading-relaxed mb-10 font-light">
-                At Ink & Print Studio, we believe every celebration deserves an invitation that speaks to its uniqueness. What started as a small printing press has grown into a premium wedding stationery studio, serving thousands of happy couples across India.
+                Ink & Print Studio is Hyderabad’s trusted destination for wedding invitation cards, marriage cards, and premium invitation printing. We specialize in luxury, traditional, and modern wedding card designs, offering customization to match every couple’s style. From designer invitations to digital wedding cards, we ensure top-quality craftsmanship and elegant printing. Conveniently located in Secunderabad near ECIL Cross Roads, we serve customers across Hyderabad and Telangana. Whether you’re looking for wedding card printing, marriage invitation design, or wholesale wedding cards, Ink & Print Studio delivers beautiful invites that make every celebration memorable.
               </p>
               <div className="flex flex-wrap gap-12 border-t border-[#dcd8cc] pt-8">
                 <div>

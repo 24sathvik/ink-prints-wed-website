@@ -30,12 +30,14 @@ export function Footer() {
               <Logo isFooter />
             </Link>
             <p className="text-[#f2efe6]/60 text-sm leading-relaxed mb-8 font-light max-w-xs">
-              Crafting premium wedding invitations and printing services with elegance and precision since 2010.
+              Hyderabad’s trusted destination for luxury wedding invitations and premium printing, conveniently located in Secunderabad.
             </p>
             <div className="flex gap-4">
               <motion.a
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href="https://www.instagram.com/inkandprintstudio/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#32612d]/50 flex items-center justify-center hover:bg-[#717f65] transition-colors text-[#f2efe6]"
               >
                 <Instagram className="w-5 h-5" />
@@ -87,15 +89,15 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-[#f2efe6]/60 font-light">
                 <MapPin className="w-5 h-5 mt-0.5 text-[#717f65] shrink-0" />
-                <span>123 Wedding Lane, Print District,<br /> Mumbai 400001</span>
+                <span>1-7-189, ECIL Cross Roads,<br /> opp. ECIL Bus Terminal Road,<br /> Kamala Nagar, Moula Ali,<br /> Secunderabad, Telangana 500062</span>
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919347133787"
                   className="flex items-center gap-3 text-sm text-[#f2efe6]/60 hover:text-[#717f65] transition-colors font-light"
                 >
                   <Phone className="w-5 h-5 text-[#717f65]" />
-                  +91 98765 43210
+                  +91 93471 33787
                 </a>
               </li>
               <li>

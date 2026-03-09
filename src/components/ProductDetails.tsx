@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     ShoppingBag,
     ChevronLeft,
@@ -17,6 +17,11 @@ import {
 } from 'lucide-react';
 import { Product } from '@/lib/products';
 import { ProductCard } from '@/components/ProductCard';
+import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
+import { RecentlyViewed } from '@/components/RecentlyViewed';
+import { getProducts } from '@/lib/get-products';
+
+import { useCart } from '@/hooks/useCart';
 
 interface ProductDetailsProps {
     product: Product;
@@ -25,25 +30,16 @@ interface ProductDetailsProps {
 export function ProductDetails({ product }: ProductDetailsProps) {
     const [quantity, setQuantity] = useState(product.minQuantity || 1);
     const [activeImage, setActiveImage] = useState(0);
-    const [recentlyViewed, setRecentlyViewed] = useState<any[]>([]);
+    const [addedToast, setAddedToast] = useState(false);
+    const { addProduct } = useRecentlyViewed();
+    const { addToCart } = useCart();
 
     useEffect(() => {
-        // Handle recently viewed
-        try {
-            const stored = localStorage.getItem('recentlyViewed');
-            let viewed = stored ? JSON.parse(stored) : [];
-
-            // Add current product to viewed
-            viewed = viewed.filter((p: any) => p.id !== product.id);
-            viewed.unshift(product);
-            viewed = viewed.slice(0, 10); // Keep last 10
-
-            localStorage.setItem('recentlyViewed', JSON.stringify(viewed));
-            setRecentlyViewed(viewed.filter((p: any) => p.id !== product.id));
-        } catch (e) {
-            console.error("Error updating recently viewed", e);
+        if (product && product.id) {
+            // Add current product to viewed on mount
+            addProduct(product.id);
         }
-    }, [product]);
+    }, [product, addProduct]);
 
     const handleQuantityChange = (val: number) => {
         const nextVal = quantity + val;
@@ -52,8 +48,35 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         }
     };
 
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.images[0],
+            quantity: quantity
+        });
+
+        setAddedToast(true);
+        setTimeout(() => setAddedToast(false), 3000);
+    };
+
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* Toast Notification */}
+            <AnimatePresence>
+                {addedToast && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 50 }}
+                        className="fixed bottom-10 right-10 z-[100] bg-[#32612d] text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 font-medium"
+                    >
+                        <ShoppingBag className="w-5 h-5" /> Added to Cart successfully!
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
                 {/* Image Gallery */}
                 <div className="space-y-6">
@@ -62,7 +85,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                             src={product.images[activeImage]}
                             alt={product.title}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                             priority
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
@@ -98,7 +121,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                                         src={img}
                                         alt={`${product.title} ${i + 1}`}
                                         fill
-                                        className="object-cover"
+                                        className="object-contain p-1"
                                         sizes="100px"
                                     />
                                 </button>
@@ -110,16 +133,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 {/* Product Info */}
                 <div className="flex flex-col">
                     <div className="mb-8">
-                        <div className="flex items-center gap-2 mb-4">
-                            <div className="flex text-[#C4A87C]">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className="w-4 h-4 fill-current" />
-                                ))}
-                            </div>
-                            <span className="text-xs text-[#6B6462] font-medium uppercase tracking-widest">(24 Reviews)</span>
-                        </div>
-
-                        <h1 className="font-serif text-4xl md:text-5xl text-[#2D2926] mb-4 leading-tight">
+                        <h1 className="font-serif text-4xl md:text-5xl text-[#2D2926] mb-4 leading-tight pt-5">
                             {product.title}
                         </h1>
 
@@ -159,21 +173,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
                         <div className="flex flex-col sm:flex-row gap-4">
                             <button
-                                onClick={() => {
-                                    const message = encodeURIComponent(`Hello, I am interested in ${product.title}. Price: ₹${product.price}. Please share more details.`);
-                                    window.open(`https://wa.me/919999999999?text=${message}`, '_blank');
-                                }}
-                                className="flex-1 bg-[#25D366] text-white py-4 rounded-full font-medium hover:bg-[#128C7E] transition-all duration-300 flex items-center justify-center gap-3 shadow-lg group"
+                                onClick={handleAddToCart}
+                                className="flex-1 bg-[#2D2926] text-white py-4 rounded-full font-medium hover:bg-[#1a1a1a] transition-all duration-300 flex items-center justify-center gap-3 shadow-lg group"
                             >
                                 <ShoppingBag className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                                Request via WhatsApp
+                                Add to Cart
                             </button>
-                            <Link
-                                href="/contact"
-                                className="px-8 py-4 border border-[#E8E0D5] rounded-full flex items-center justify-center text-[#2D2926] hover:bg-white hover:border-[#C4A87C] hover:text-[#C4A87C] transition-all font-medium"
+                            <button
+                                onClick={() => {
+                                    const message = encodeURIComponent(`Hello, I am interested in ${product.title}. Price: ₹${product.price}. Please share more details.`);
+                                    window.open(`https://wa.me/919347133787?text=${message}`, '_blank');
+                                }}
+                                className="px-8 py-4 bg-[#25D366] text-white rounded-full flex items-center justify-center hover:bg-[#128C7E] transition-all font-medium shadow-md group"
                             >
-                                Request a Quote
-                            </Link>
+                                WhatsApp
+                            </button>
                         </div>
                     </div>
 
@@ -206,7 +220,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                 <div className="border-b border-[#E8E0D5] mb-10 flex gap-12">
                     <button className="pb-4 text-sm font-bold uppercase tracking-widest text-[#2D2926] border-b-2 border-[#2D2926]">Description</button>
                     <button className="pb-4 text-sm font-bold uppercase tracking-widest text-[#6B6462] hover:text-[#2D2926] transition-colors">Specifications</button>
-                    <button className="pb-4 text-sm font-bold uppercase tracking-widest text-[#6B6462] hover:text-[#2D2926] transition-colors">Reviews</button>
                 </div>
                 <div className="max-w-3xl prose prose-neutral prose-stone">
                     <p className="text-[#6B6462] leading-relaxed mb-6">
@@ -223,26 +236,9 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             </section>
 
             {/* Recently Viewed */}
-            {recentlyViewed.length > 0 && (
-                <section className="pt-20 border-t border-[#E8E0D5]">
-                    <div className="flex items-center justify-between mb-12">
-                        <h2 className="font-serif text-3xl md:text-4xl text-[#2D2926]">Recently Viewed</h2>
-                        <div className="flex gap-2">
-                            <button className="w-10 h-10 rounded-full border border-[#E8E0D5] flex items-center justify-center hover:bg-white transition-colors">
-                                <ChevronLeft className="w-4 h-4" />
-                            </button>
-                            <button className="w-10 h-10 rounded-full border border-[#E8E0D5] flex items-center justify-center hover:bg-white transition-colors">
-                                <ChevronRight className="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 overflow-x-auto pb-4 scrollbar-hide">
-                        {recentlyViewed.map((p, i) => (
-                            <ProductCard key={p.id} product={p} index={i} />
-                        ))}
-                    </div>
-                </section>
-            )}
+            <section className="pt-20 border-t border-[#E8E0D5]">
+                <RecentlyViewed excludeId={product.id} />
+            </section>
         </div>
     );
 }
