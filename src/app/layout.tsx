@@ -6,6 +6,8 @@ import Script from "next/script";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { CartProvider } from "@/components/CartProvider";
+import { CartDrawer } from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
   title: "Ink & Print Studio | Premium Wedding Cards & Printing Services",
@@ -20,27 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-[#f2efe6]">
-        <Script
-          id="orchids-browser-logs"
-          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts/orchids-browser-logs.js"
-          strategy="afterInteractive"
-          data-orchids-project-id="4950fa37-ca09-4669-9f31-89253cfe0176"
-        />
-        <ErrorReporter />
-        <Script
-          src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"
-          strategy="afterInteractive"
-          data-target-origin="*"
-          data-message-type="ROUTE_CHANGE"
-          data-include-search-params="true"
-          data-only-in-iframe="true"
-          data-debug="true"
-          data-custom-data='{"appName": "YourApp", "version": "1.0.0", "greeting": "hi"}'
-        />
-        <Navbar />
-        {children}
-        <WhatsAppButton />
-        <Footer />
+        <CartProvider>
+          <ErrorReporter />
+          <Navbar />
+          {children}
+          <CartDrawer />
+          <WhatsAppButton />
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

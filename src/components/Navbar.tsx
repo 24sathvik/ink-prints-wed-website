@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import { Logo } from '@/components/Logo';
+import { useCart } from '@/components/CartProvider';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -17,6 +18,7 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { itemCount, setIsOpen } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,11 +63,17 @@ export function Navbar() {
             {/* Actions */}
             <div className="flex items-center gap-4 sm:gap-6">
               <motion.button
+                onClick={() => setIsOpen(true)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-[#000000]/70 hover:text-[#32612d] transition-colors"
+                className="relative p-2 text-[#000000]/70 hover:text-[#32612d] transition-colors"
               >
-                <Heart className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
+                {itemCount > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 bg-[#32612d] text-white text-[10px] font-bold rounded-full flex items-center justify-center translate-x-1/4 -translate-y-1/4">
+                    {itemCount}
+                  </span>
+                )}
               </motion.button>
 
               <Link href="/contact" className="hidden sm:block">

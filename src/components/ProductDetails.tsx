@@ -21,7 +21,7 @@ import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { RecentlyViewed } from '@/components/RecentlyViewed';
 import { getProducts } from '@/lib/get-products';
 
-import { useCart } from '@/hooks/useCart';
+import { useCart } from '@/components/CartProvider';
 
 interface ProductDetailsProps {
     product: Product;
@@ -49,13 +49,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     };
 
     const handleAddToCart = () => {
-        addToCart({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.images[0],
-            quantity: quantity
-        });
+        addToCart(product, quantity);
 
         setAddedToast(true);
         setTimeout(() => setAddedToast(false), 3000);

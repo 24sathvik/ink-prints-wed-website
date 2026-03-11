@@ -122,13 +122,7 @@ export function CartDrawer() {
                   <span className="font-serif text-xl font-semibold text-[#2D2926]">₹{total.toLocaleString()}</span>
                 </div>
                 <p className="text-xs text-[#6B6462] mb-4">Shipping calculated at checkout</p>
-                <Link
-                  href="/cart"
-                  onClick={() => setIsOpen(false)}
-                  className="block w-full py-3.5 bg-[#C4A87C] text-white text-center rounded-full font-medium hover:bg-[#B8977E] transition-colors"
-                >
-                  Proceed to Checkout
-                </Link>
+
                 <button
                   onClick={() => setIsOpen(false)}
                   className="block w-full py-3 mt-2 text-[#2D2926] text-center text-sm font-medium hover:text-[#C4A87C] transition-colors"
