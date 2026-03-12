@@ -17,7 +17,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: Math.min(index * 0.08, 0.4), ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.3), ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
       <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#f2efe6] mb-4 hover-lift">
@@ -27,8 +27,9 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          loading="lazy"
-          quality={80}
+          loading={index < 8 ? "eager" : "lazy"}
+          priority={index < 8}
+          quality={70}
         />
 
         {/* Hover overlay with shimmer */}
