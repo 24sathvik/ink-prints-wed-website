@@ -294,7 +294,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="rounded-[2.5rem] overflow-hidden shadow-elegant h-[400px] border border-[#dcd8cc]/50">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.755678!2d72.8200!3d19.0050!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAwJzE4LjAiTiA3MsKwNDknMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.1042306786857!2d78.566812!3d17.4764831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI4JzM1LjMiTiA3OMKwMzQnMDAuNSJF!5e0!3m2!1sen!2sin!4v1715849887752!5m2!1sen!2sin&q=1-7-189,+ECIL+Cross+Roads,+opp.+ECIL+Bus+Terminal+Road,+Kamala+Nagar,+Moula+Ali,+Secunderabad,+Telangana+500062"
               width="100%"
               height="100%"
               style={{ border: 0 }}

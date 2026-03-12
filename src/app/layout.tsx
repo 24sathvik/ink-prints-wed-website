@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { CartProvider } from "@/components/CartProvider";
 import { CartDrawer } from "@/components/CartDrawer";
+import { GlobalBackgroundArt } from "@/components/GlobalBackgroundArt";
 
 export const metadata: Metadata = {
   title: "Ink & Print Studio | Premium Wedding Cards & Printing Services",
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className="antialiased bg-[#f2efe6]">
         <CartProvider>
           <ErrorReporter />
+          <GlobalBackgroundArt />
           <Navbar />
           {children}
           <CartDrawer />

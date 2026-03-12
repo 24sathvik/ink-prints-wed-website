@@ -1,14 +1,13 @@
-import { getProductById, getProducts } from '@/lib/get-products';
+import { getProductById } from '@/lib/get-products';
 import { ProductDetails } from '@/components/ProductDetails';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-export async function generateStaticParams() {
-  const products = getProducts();
-  return products.map((product) => ({
-    id: product.id,
-  }));
-}
+// We do NOT pre-generate static params at build time.
+// With 4000+ products, pre-rendering all pages would exhaust build memory and time.
+// Pages are rendered on-demand and Vercel/Netlify cache them automatically (ISR-like behaviour).
+export const dynamicParams = true;
+export const revalidate = 3600; // Re-validate cached pages every hour
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
