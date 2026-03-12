@@ -32,39 +32,27 @@ export function HeroSection() {
             <div className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] md:w-[1100px] md:h-[1100px] pointer-events-none opacity-[0.05] z-0">
                 <svg viewBox="0 0 500 500" className="w-full h-full text-[#32612d]" fill="none" stroke="currentColor" strokeWidth="0.6" strokeLinecap="round" strokeLinejoin="round">
                     <g transform="rotate(10 250 250)">
-                        {/* Elegant swooping main stems */}
                         <path d="M400,100 C350,150 300,250 150,450" />
                         <path d="M400,100 C380,120 330,220 180,450" />
                         <path d="M350,150 C380,200 420,300 300,480" />
-
-                        {/* Intricate leaves */}
                         <path d="M360,170 C330,120 270,100 240,130 C250,170 310,200 360,170 Z" />
                         <path d="M360,170 C400,130 460,150 470,190 C450,220 390,210 360,170 Z" />
-                        
                         <path d="M300,250 C260,190 190,170 160,210 C180,260 250,290 300,250 Z" />
                         <path d="M300,250 C350,200 420,220 440,270 C410,310 340,290 300,250 Z" />
-                        
                         <path d="M240,330 C200,270 140,250 110,290 C130,340 190,370 240,330 Z" />
                         <path d="M240,330 C280,280 340,300 350,340 C330,380 270,370 240,330 Z" />
-
                         <path d="M350,150 C320,110 280,100 260,120 C270,150 310,170 350,150 Z" />
-                        
                         <path d="M380,200 C420,170 470,180 480,210 C460,240 410,230 380,200 Z" />
                         <path d="M380,200 C350,170 300,180 290,210 C310,240 360,230 380,200 Z" />
-                        
-                        {/* Leaf veins */}
                         <path d="M360,170 C320,140 280,130 240,130" strokeWidth="0.2" />
                         <path d="M360,170 C410,150 450,160 470,190" strokeWidth="0.2" />
                         <path d="M300,250 C250,210 200,200 160,210" strokeWidth="0.2" />
                         <path d="M300,250 C360,220 410,240 440,270" strokeWidth="0.2" />
                         <path d="M240,330 C200,290 150,280 110,290" strokeWidth="0.2" />
-                        
-                        {/* Delicate bud details */}
                         <circle cx="210" cy="110" r="4" fill="currentColor" fillOpacity="0.5" />
                         <circle cx="200" cy="95" r="2.5" fill="currentColor" fillOpacity="0.5" />
                         <path d="M240,130 C220,120 210,110 210,110" strokeWidth="0.3" />
                         <path d="M210,110 C205,100 200,95 200,95" strokeWidth="0.2" />
-                        
                         <circle cx="450" cy="130" r="4" fill="currentColor" fillOpacity="0.5" />
                         <circle cx="465" cy="120" r="2.5" fill="currentColor" fillOpacity="0.5" />
                         <path d="M470,190 C460,150 450,130 450,130" strokeWidth="0.3" />
@@ -75,27 +63,19 @@ export function HeroSection() {
 
             <div className="max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center z-10">
 
-                {/* Left Side: Rich Typography & Actions */}
-                <div className="flex flex-col justify-center space-y-10 max-w-2xl order-2 lg:order-1 pb-20 lg:pb-0 relative">
-                    
-                    {/* Floating Authentic Stamp */}
-                    <div className="hidden sm:flex absolute -left-6 md:-left-20 -top-16 md:-top-24 items-center justify-center pointer-events-none opacity-80 z-0">
-                        <CircularStamp />
-                    </div>
+                    {/* Left Side: Rich Typography & Actions */}
+                    <div className="flex flex-col justify-center space-y-10 max-w-2xl order-2 lg:order-1 pb-20 lg:pb-0 relative">
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative z-10"
-                    >
+                        <motion.div
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                            className="relative z-10"
+                        >
                         <h1
                             className="text-[#2a3028] text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[1.05] tracking-tight"
                             style={{ fontFamily: "'Quincy CF', 'Quincy', 'Playfair Display', serif" }}
                         >
-                            <span className="block text-[#5e7154] text-sm md:text-base uppercase tracking-[0.3em] font-light mb-6 font-sans">
-                                Bespoke Design Studio
-                            </span>
                             Timeless Artistry <br className="hidden sm:block" />
                             <span className="italic font-light text-[#5e7154]">In Every Detail.</span>
                         </h1>
@@ -171,9 +151,14 @@ function StationerySuite() {
         mouseY.set(0.5);
     };
 
-    // Calculate rotation for the entire group to give a 3D float effect
+    // All useMotionTemplate hooks declared at top level (required by React hooks rules)
     const rotateX = useMotionTemplate`calc((${smoothY} - 0.5) * -20deg)`;
     const rotateY = useMotionTemplate`calc((${smoothX} - 0.5) * 20deg)`;
+    const envelopeX = useMotionTemplate`calc((${smoothX} - 0.5) * -40px)`;
+    const envelopeY = useMotionTemplate`calc((${smoothY} - 0.5) * -40px)`;
+    const cardX = useMotionTemplate`calc((${smoothX} - 0.5) * 30px)`;
+    const cardY = useMotionTemplate`calc((${smoothY} - 0.5) * 30px)`;
+    const glare = useMotionTemplate`radial-gradient(circle at calc(${smoothX} * 100%) calc(${smoothY} * 100%), rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 60%)`;
 
     return (
         <motion.div 
@@ -190,11 +175,11 @@ function StationerySuite() {
             <motion.div 
                 className="absolute w-[280px] md:w-[360px] aspect-[4/3] bg-[#d5cfc4] rounded shadow-2xl transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-8 group-hover:-rotate-6"
                 style={{ 
-                    x: useMotionTemplate`calc((${smoothX} - 0.5) * -40px)`,
-                    y: useMotionTemplate`calc((${smoothY} - 0.5) * -40px)`,
+                    x: envelopeX,
+                    y: envelopeY,
                     rotateZ: -8,
                     transformStyle: "preserve-3d",
-                    transform: "translateZ(-40px)" // Push back
+                    transform: "translateZ(-40px)"
                 }}
             >
                 {/* Envelope Flap */}
@@ -204,42 +189,14 @@ function StationerySuite() {
                 />
             </motion.div>
 
-            {/* Middle Layer: Details / RSVP Card */}
-            <motion.div 
-                className="absolute w-[160px] md:w-[200px] aspect-[3/4] bg-[#f8f6f0] rounded-sm shadow-xl p-6 border border-[#e8e4db] flex flex-col items-center justify-start text-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-16 group-hover:translate-y-4 group-hover:rotate-12"
-                style={{
-                    x: useMotionTemplate`calc((${smoothX} - 0.5) * -15px)`,
-                    y: useMotionTemplate`calc((${smoothY} - 0.5) * -15px)`,
-                    left: "5%",
-                    bottom: "10%",
-                    rotateZ: -5,
-                    transform: "translateZ(10px)",
-                    transformStyle: "preserve-3d"
-                }}
-            >
-                <div className="w-5 h-5 mb-3 opacity-60">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#717f65" strokeWidth="1.5">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                    </svg>
-                </div>
-                <h4 className="text-[#32612d] font-serif text-lg md:text-xl mb-2 italic">Details</h4>
-                <div className="w-8 h-[1px] bg-[#32612d] opacity-20 mb-3" />
-                <p className="text-[7px] md:text-[9px] uppercase font-sans tracking-widest text-[#515151] leading-relaxed">
-                    Dinner &amp; Dancing<br/>To Follow
-                </p>
-                {/* Simulated ribbon draped over RSVP */}
-                <div className="absolute top-1/2 -right-6 w-8 h-40 bg-[#9fb393]/80 -rotate-[15deg] blur-[0.5px] rounded-full shadow-lg" style={{ transform: "translateZ(-5px)" }} />
-            </motion.div>
-
             {/* Front Layer: Main Invitation Card */}
             <motion.div 
                 className="absolute w-[240px] md:w-[320px] aspect-[4/5] bg-[#ffffff] rounded-sm shadow-[0_30px_60px_rgba(50,97,45,0.15)] p-8 flex flex-col items-center justify-center text-center border border-[#ece9e0] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-6 group-hover:-translate-y-4 group-hover:-rotate-2"
                 style={{
-                    x: useMotionTemplate`calc((${smoothX} - 0.5) * 30px)`,
-                    y: useMotionTemplate`calc((${smoothY} - 0.5) * 30px)`,
+                    x: cardX,
+                    y: cardY,
                     rotateZ: 3,
-                    transform: "translateZ(50px)", // Pop out
+                    transform: "translateZ(50px)",
                     transformStyle: "preserve-3d"
                 }}
             >
@@ -259,39 +216,9 @@ function StationerySuite() {
                 {/* Simulated Light Glare on main card */}
                 <motion.div
                     className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-30 rounded-sm"
-                    style={{
-                        background: useMotionTemplate`radial-gradient(
-                            circle at calc(${smoothX} * 100%) calc(${smoothY} * 100%),
-                            rgba(255, 255, 255, 1) 0%,
-                            rgba(255, 255, 255, 0) 60%
-                        )`
-                    }}
+                    style={{ background: glare }}
                 />
             </motion.div>
         </motion.div>
     );
-}
-
-// Decorative spinning stamp for authentic feel
-const CircularStamp = () => {
-    return (
-        <div className="relative w-[140px] h-[140px] md:w-[180px] md:h-[180px]">
-            <svg viewBox="0 0 200 200" className="w-[100%] h-[100%] opacity-[0.85] animate-[spin_20s_linear_infinite]">
-                <defs>
-                    <path id="circlePath" d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" />
-                </defs>
-                <text fill="#32612d" fontSize="16.5" fontWeight="600" letterSpacing="6" className="uppercase font-sans" style={{ fontFamily: "'Quicksand', sans-serif" }}>
-                    <textPath href="#circlePath" startOffset="0%">
-                        • AUTHENTIC &amp; BESPOKE • PRESSED WITH LOVE 
-                    </textPath>
-                </text>
-            </svg>
-            {/* Center icon / monogram */}
-            <div className="absolute inset-0 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8 md:w-10 md:h-10 opacity-70">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#32612d" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            </div>
-        </div>
-    )
 }

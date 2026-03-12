@@ -22,8 +22,8 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a3317] text-white/90 border-t border-[#32612d]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+    <footer className="relative bg-[#1a3317] text-white/90 border-t border-[#32612d] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6 group">

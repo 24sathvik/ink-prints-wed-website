@@ -23,7 +23,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="min-h-screen pt-24 pb-20 bg-[#FFFDF9]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Breadcrumbs */}
         <nav className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#6B6462] mb-12">
           <Link href="/" className="hover:text-[#C4A87C]">Home</Link>
